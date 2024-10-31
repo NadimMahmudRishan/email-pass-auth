@@ -2,6 +2,7 @@ import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import app from "../../firebase/firebase.config";
 import { useState } from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const [errormessage, setErrormessage] = useState(null);
@@ -22,7 +23,7 @@ const Signup = () => {
         "Password should be at least 6 character (weak-password)."
       );
       return;
-    } else if ((!/[A-Z]/.test(password)) || (!/[a-z]/.test(password))) {
+    } else if (!/[A-Z]/.test(password) || !/[a-z]/.test(password)) {
       setErrormessage(
         "Password should be mix of Upper-case[A-Z] and Lower-case[a-z]."
       );
@@ -96,10 +97,19 @@ const Signup = () => {
                 {success && <p className="text-green-400">{success}</p>}
               </label>
             </div>
-
+            <div>
+              <input type="checkbox" name="terms" required />
+              <label className="ml-2">Accept terms and conditions</label>
+            </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Sign Up</button>
             </div>
+            <p>
+              Already have an account!{" "}
+              <Link className="text-blue-700" to="/login">
+                Please Login
+              </Link>
+            </p>
           </form>
         </div>
       </div>
